@@ -1,4 +1,10 @@
-export const networkFormat = (source, followers, following) => {
+export const networkFormat = (
+  source,
+  followers,
+  following,
+  avatar = "",
+  ens = ""
+) => {
   // console.log(source, followers, following);
   if (followers && following) {
     let { list } = followers;
@@ -44,7 +50,7 @@ export const networkFormat = (source, followers, following) => {
           group: 1
         };
       }),
-      { id: source }
+      { id: source, domain: ens, avatar }
     ];
     // console.log(nodes, links);
     return { nodes, links };

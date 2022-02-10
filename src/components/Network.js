@@ -39,7 +39,7 @@ const Network = ({ address }) => {
       followingCount,
       followers,
       avatar,
-      ens,
+      domain,
       followings,
       social,
       friends
@@ -58,7 +58,7 @@ const Network = ({ address }) => {
             followings: { list: [] },
             friends: { list: [] },
             avatar: "",
-            ens: "",
+            domain: "",
             social: { twitter: "" }
           }
         };
@@ -71,7 +71,7 @@ const Network = ({ address }) => {
           followings: { list: [] },
           friends: { list: [] },
           avatar: "",
-          ens: "",
+          domain: "",
           social: { twitter: "" }
         }
       };
@@ -81,11 +81,11 @@ const Network = ({ address }) => {
   let { nodes, links } = useMemo(
     () => {
       if (data) {
-        return networkFormat(address, followers, followings);
+        return networkFormat(address, followers, followings, avatar, domain);
       }
       return [];
     },
-    [data, address, followers, followings]
+    [data, address, followers, followings, domain, avatar]
   );
   let relations = useMemo(
     () => {
@@ -132,7 +132,7 @@ const Network = ({ address }) => {
               <SmallCard
                 followings={followingCount}
                 avatar={avatar}
-                ens={ens}
+                ens={domain}
                 followers={followerCount}
                 social={social}
                 address={address}

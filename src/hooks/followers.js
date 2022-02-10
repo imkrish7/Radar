@@ -11,7 +11,7 @@ export const useFetchFollowers = address => {
     query Identity($address: String!) {
       identity(address: $address) {
         address
-        ens
+        domain
         avatar
         followingCount
         followerCount

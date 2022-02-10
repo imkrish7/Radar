@@ -6,8 +6,9 @@
 	backdrop-filter: blur(10px);
 	padding: 10px;
 	display: flex;
-	align-items: center;
+	/* align-items: center; */
 	justify-content: center;
+	flex-direction: column;
 	column-gap: 10px;
 }
 

@@ -1,9 +1,34 @@
-import React, { useState } from "react";
-import { Box, CircularProgress, Typography } from "@mui/material";
+import React, { useState, useMemo } from "react";
+import {
+  Box,
+  CircularProgress,
+  Typography,
+  Pagination,
+  PaginationItem
+} from "@mui/material";
 import UserCard from "./UserCard";
 import Profile from "./Profile";
 const Friends = ({ data, loading }) => {
   const [profile, setProfile] = useState("");
+  const [page, setPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [current, setCurrent] = useState(0);
+  const pages = useMemo(
+    () => {
+      if (data) {
+        let temp = Math.ceil(data.length / itemsPerPage);
+        return temp;
+      }
+      return 0;
+    },
+    [data]
+  );
+
+  const handleChange = (event, value) => {
+    let temp = itemsPerPage * (value - 1);
+    setCurrent(temp);
+    setPage(value);
+  };
   return (
     <Box
       sx={{
@@ -17,7 +42,7 @@ const Friends = ({ data, loading }) => {
       {loading
         ? <CircularProgress />
         : data.length > 0
-          ? data.map((friend, index) => {
+          ? data.slice(current, itemsPerPage + current).map((friend, index) => {
               return (
                 <UserCard
                   checkProfile={setProfile}
@@ -29,6 +54,23 @@ const Friends = ({ data, loading }) => {
           : <Typography sx={{ color: "#bdc3c7" }} variant="h3">
               Sorry, We havn't had your friend list.
             </Typography>}
+      <Pagination
+        renderItem={number => {
+          return (
+            <PaginationItem
+              component={"span"}
+              sx={{
+                color: "#bdc3c7",
+                backgroundColor:
+                  number.page === page ? "#8e44ad" : "transparent"
+              }}
+              {...number}
+            />
+          );
+        }}
+        onChange={handleChange}
+        count={pages}
+      />
     </Box>
   );
 };
