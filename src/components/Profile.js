@@ -16,58 +16,66 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import { useFetchProfile } from "../hooks/getProfile";
 import Error from "./Error";
 const Profile = ({ address, close }) => {
-    const [open, setOpen] = useState(true);
-	const { data, loading, error } = useFetchProfile(address);
-  const profile = useMemo(
-    () => {
-      if (data) {
-        const {
-          identity: {
-            address,
-            domain,
-            avatar,
-            followerCount,
-            followingCount,
-            social
-          }
-        } = data;
-        return {
+  const [open, setOpen] = useState(true);
+  const { data, loading, error } = useFetchProfile(address);
+  const profile = useMemo(() => {
+    if (data) {
+      const {
+        identity: {
           address,
           domain,
           avatar,
           followerCount,
           followingCount,
           social
-        };
-      }
-      return {};
-    },
-    [data]
-  );
-  const handleClose = ()=>{
-	  setOpen(false)
-	  close("")
-  }
+        }
+      } = data;
+      return {
+        address,
+        domain,
+        avatar,
+        followerCount,
+        followingCount,
+        social
+      };
+    }
+    return {};
+  }, [data]);
+  const handleClose = () => {
+    setOpen(false);
+    close("");
+  };
   return (
-    <Modal  sx={{
-          width: "100%",
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        }} onBackdropClick={handleClose} open={open} onClose={handleClose}>
+    <Modal
+      sx={{
+        width: "100%",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+      }}
+      onBackdropClick={handleClose}
+      open={open}
+      onClose={handleClose}
+    >
       <Box>
-        {loading ? <CircularProgress /> : error ? <Error error={error} />: <Card
-          sx={{
-            width: "400px",
-            backgroundColor: "#fff",
-			display: "flex",
-			flexDirection: "column",
-			flexWrap: "wrap"
-		}}
-        >
-          {profile.avatar
-            ? <CardMedia
+        {loading ? (
+          <CircularProgress />
+        ) : error ? (
+          <Error error={error} />
+        ) : (
+          <Card
+            sx={{
+              width: "400px",
+              backgroundColor: "#ffffffa8",
+              display: "flex",
+              flexDirection: "column",
+              flexWrap: "wrap",
+              backdropFilter: "blur(10px)"
+            }}
+          >
+            {profile.avatar ? (
+              <CardMedia
                 component="img"
                 height="240"
                 image={profile.avatar}
@@ -76,56 +84,59 @@ const Profile = ({ address, close }) => {
                   objectFit: "contain"
                 }}
               />
-            : <Skeleton
-				variant="rectangular"
-                animation={"wave"}
-                height={240}
-              />}
-          <CardContent>
-            <Typography sx={{ wordBreak: "break-word" }} variant="h5" component="h5">
-              {address}
-            </Typography>
-            <Box
-              sx={{ display: "flex", alignItems: "center", columnGap: "5px" }}
-            >
-              <Tooltip title="Follower Count">
-                <DomainIcon sx={{ color: "#636e72" }} />
-              </Tooltip>
+            ) : (
+              <Skeleton variant="rectangular" animation={"wave"} height={240} />
+            )}
+            <CardContent>
               <Typography
-                sx={{ fontWeight: "bold", color: "#636e72" }}
-                variant={"p"}
+                sx={{ wordBreak: "break-word", color: "#383864" }}
+                variant="h5"
+                component="h5"
               >
-                {profile.domain || "Not Available"}
+                {address}
               </Typography>
-            </Box>
-			 <Box
-              sx={{ display: "flex", alignItems: "center", columnGap: "5px" }}
-            >
-              <Tooltip title="Follower Count">
-                <FollowTheSignsIcon sx={{ color: "#636e72" }} />
-              </Tooltip>
-              <Typography
-                sx={{ fontWeight: "bold", color: "#636e72" }}
-                variant={"p"}
+              <Box
+                sx={{ display: "flex", alignItems: "center", columnGap: "5px" }}
               >
-                {profile.followerCount || "Not Available"}
-              </Typography>
-            </Box>
-            <Box
-              sx={{ display: "flex", alignItems: "center", columnGap: "5px" }}
-            >
-              <Tooltip title="Follower Count">
-                <TwitterIcon sx={{ color: "#636e72" }} />
-              </Tooltip>
-              <Typography
-                sx={{ fontWeight: "bold", color: "#636e72" }}
-                variant={"p"}
+                <Tooltip title="Follower Count">
+                  <DomainIcon sx={{ color: "#636e72" }} />
+                </Tooltip>
+                <Typography
+                  sx={{ fontWeight: "bold", color: "#636e72" }}
+                  variant={"p"}
+                >
+                  {profile.domain || "Not Available"}
+                </Typography>
+              </Box>
+              <Box
+                sx={{ display: "flex", alignItems: "center", columnGap: "5px" }}
               >
-                {profile.social?.twitter || "Not Available"}
-              </Typography>
-            </Box>
-          </CardContent>
-        </Card>}
+                <Tooltip title="Follower Count">
+                  <FollowTheSignsIcon sx={{ color: "#636e72" }} />
+                </Tooltip>
+                <Typography
+                  sx={{ fontWeight: "bold", color: "#636e72" }}
+                  variant={"p"}
+                >
+                  {profile.followerCount || "Not Available"}
+                </Typography>
+              </Box>
+              <Box
+                sx={{ display: "flex", alignItems: "center", columnGap: "5px" }}
+              >
+                <Tooltip title="Follower Count">
+                  <TwitterIcon sx={{ color: "#636e72" }} />
+                </Tooltip>
+                <Typography
+                  sx={{ fontWeight: "bold", color: "#636e72" }}
+                  variant={"p"}
+                >
+                  {profile.social?.twitter || "Not Available"}
+                </Typography>
+              </Box>
+            </CardContent>
+          </Card>
+        )}
       </Box>
     </Modal>
   );
