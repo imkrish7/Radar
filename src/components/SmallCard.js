@@ -92,7 +92,7 @@ const SmallCard = ({ ens, address, social ,followers, followings, avatar }) => {
         <CardActions>
           { social?.twitter.length > 0 && 
             <IconButton>
-              <a href={social["twitter"]} target={"_blank"} >
+              <a href={social["twitter"]} rel="noreferrer" target={"_blank"} >
               <TwitterIcon sx={{ color: "#fff" }} />
               </a>
             </IconButton>
