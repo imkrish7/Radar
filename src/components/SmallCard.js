@@ -2,7 +2,6 @@ import React from "react";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import {
   Card,
-  CardContent,
   CardActions,
   Box,
   CardMedia,

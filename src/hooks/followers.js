@@ -1,11 +1,5 @@
-import { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 export const useFetchFollowers = address => {
-  const [response, setResponse] = useState({
-    loading: true,
-    data: null,
-    error: false
-  });
   const follower = gql`
     # Write your query or mutation here
     query Identity($address: String!) {

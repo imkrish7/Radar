@@ -11,7 +11,7 @@ import Profile from "./Profile";
 
 const Relations = ({ data, loading }) => {
   const [profile, setProfile] = useState("");
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const itemsPerPage = 5;
   const [page, setPage] = useState(1);
   const [current, setCurrent] = useState(0);
   const pages = useMemo(

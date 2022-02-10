@@ -11,7 +11,7 @@ import Profile from "./Profile";
 const Friends = ({ data, loading }) => {
   const [profile, setProfile] = useState("");
   const [page, setPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const itemsPerPage = 5;
   const [current, setCurrent] = useState(0);
   const pages = useMemo(
     () => {

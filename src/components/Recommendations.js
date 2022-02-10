@@ -14,7 +14,7 @@ import Error from "./Error";
 const Recommendations = ({ address }) => {
   // let address = "0x8ddD03b89116ba89E28Ef703fe037fF77451e38E";
   const { data, error, loading } = useFetchRecommendation(address);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const itemsPerPage = 5;
   const [page, setPage] = useState(1);
   const [current, setCurrent] = useState(0);
   const [profile, setProfile] = useState("");

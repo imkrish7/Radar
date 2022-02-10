@@ -86,7 +86,7 @@ const NetworkGraph = ({ nodes, source, links }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const node = useRef(null);
   const centerX = 480;
-  const centerY = 400;
+  const centerY = 300;
   let colorScale = scaleSequential(interpolateSpectral).domain([0, 40]);
   useEffect(() => {
     let simulation = null;
@@ -110,7 +110,7 @@ const NetworkGraph = ({ nodes, source, links }) => {
   return (
     <div>
       {showTooltip && <GraphTooltip {...{ position }} />}
-      <svg style={{ width: "100%",minHeight: "400px"}} id="graph" viewBox={"0 0 960 800"} width="960" height="800" ref={node}>
+      <svg style={{ width: "100%",minHeight: "400px"}} id="graph" viewBox={"0 0 960 600"} width="960" height="600" ref={node}>
         <g>
           {animatedNodes.length > 0 &&
             links.length > 0 &&
