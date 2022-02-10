@@ -108,9 +108,9 @@ const NetworkGraph = ({ nodes, source, links }) => {
   }, [nodes, links]);
 
   return (
-    <React.Fragment>
+    <div>
       {showTooltip && <GraphTooltip {...{ position }} />}
-      <svg id="graph" width="960" height="800" ref={node}>
+      <svg style={{ width: "100%",minHeight: "400px"}} id="graph" viewBox={"0 0 960 800"} width="960" height="800" ref={node}>
         <g>
           {animatedNodes.length > 0 &&
             links.length > 0 &&
@@ -159,12 +159,15 @@ const NetworkGraph = ({ nodes, source, links }) => {
                     });
                     setShowTooltip(false);
                   }}
+                  style={{
+                    cursor: "pointer"
+                  }}
                 />
               );
             })}
         </g>
       </svg>
-    </React.Fragment>
+    </div>
   );
 };
 
